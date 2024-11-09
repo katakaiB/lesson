@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main()
+    {
+        const double EULER_CONSTANT = 0.5772;
+        const double EPSILON = 0.00001; // допустимая погрешность
+
+        double A = 1.5; // входное значение
+        double lnAPlusEulerConstant = Math.Log(A) + EULER_CONSTANT;
+        long N = (long)Math.Ceiling(Math.Exp(lnAPlusEulerConstant));
+
+        List<double> partialSums = new List<double>();
+        double currentSum = 0;
+        for (long i = 1; i <= N; i++)
+        {
+            currentSum += 1d / i;
+            partialSums.Add(currentSum);
+        }
+
+        double finalSum = partialSums[partialSums.Count - 1];
+        Console.WriteLine("Минимальное N: " + N);
+        Console.WriteLine("Сумма ряда до N: " + finalSum);
+    }
+}
