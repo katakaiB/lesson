@@ -1,0 +1,22 @@
+using System;
+
+class Program
+{
+static void Main()
+{
+int[] array = new int[17]; // создаем массив из 17 элементов
+for (int i = 0; i < array.Length; i++)
+{
+Console.Write("Введите элемент массива под номером " + (i + 1) + ": ");
+array[i] = Convert.ToInt32(Console.ReadLine()); // читаем значения элементов массива
+}
+
+int maxElement = int.MinValue; // переменная для хранения максимального элемента
+for (int j = 0; j < array.Length; j++)
+{
+if (Math.Abs(array[j]) > Math.Abs(maxElement))
+maxElement = array[j]; // обновляем значение максимального элемента
+}
+
+Console.WriteLine("Самый большой элемент массива: " + maxElement);
+}
