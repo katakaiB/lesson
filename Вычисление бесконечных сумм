@@ -1,0 +1,28 @@
+public class SeriesCalculator
+{
+    public double CalculateSeriesSum(double x, int maxIterations)
+    {
+        double sum = 0.0;
+        double currentTerm = 1.0;
+        double angleStep = Math.PI / 4.0;
+
+        for (int i = 0; i < maxIterations; i++)
+        {
+            sum += currentTerm * Math.Sin((i + 1) * angleStep);
+            currentTerm *= x;
+        }
+
+        return sum;
+    }
+
+    public static void Main()
+    {
+        double x = 1.0;
+        int maxIterations = 100;
+
+        SeriesCalculator calculator = new SeriesCalculator();
+        double seriesSum = calculator.CalculateSeriesSum(x, maxIterations);
+
+        Console.WriteLine($"Sum of the first {maxIterations} terms is {seriesSum}.");
+    }
+}
