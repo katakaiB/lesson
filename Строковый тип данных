@@ -1,0 +1,17 @@
+using System;
+
+class Program
+{
+static void Main()
+{
+string input = "В западной стройке удалить все латинские буквы.";
+char[] latinLetters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+
+foreach (char letter in latinLetters)
+{
+input = input.Replace(letter.ToString(), "");
+}
+
+Console.WriteLine(input);
+}
+}
