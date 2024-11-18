@@ -1,0 +1,48 @@
+using System;
+
+class Program
+{
+static void Main()
+{
+int[,] matrix = new int[3, 4]; // Создаем матрицу размером 3x4
+
+for (int i = 0; i < 3; i++) // Заполняем матрицу произвольными числами
+for (int j = 0; j < 4; j++)
+matrix[i, j] = i + j;
+
+Console.WriteLine("Матрица:");
+PrintMatrix(matrix);
+
+double result = MatrixArea(matrix); // Вычисляем площадь матрицы
+Console.WriteLine($"Площадь матрицы: {result}");
+
+Console.WriteLine("Подставляем символ @ и вычисляем новую площадь матрицы.");
+for (int i = 0; i < 3; i++) // Подставляем символ '@' вместо нулей
+for (int j = 0; j < 4; j++)
+if (matrix[i, j] == 0)
+matrix[i, j] = 'a';
+
+result = MatrixArea(matrix); // Вычисляем новую площадь матрицы
+Console.WriteLine($"Площадь матрицы после подстановки: {result}");
+}
+
+private static double MatrixArea(int[,] matrix)
+{
+return matrix.GetLength(0) * matrix.GetLength(1); // Считаем площадь матрицы как произведение ее строк и столбцов
+}
+
+private static void PrintMatrix(int[,] matrix)
+{
+for (int i = 0; i < 3; i++)
+{
+for (int j = 0; j < 4; j++)
+{
+if (matrix[i, j] >= 0 && matrix[i, j] <= 9)
+Console.Write($"{matrix[i, j]} ");
+else
+Console.Write($"{matrix[i, j]} ");
+}
+Console.WriteLine();
+}
+}
+}
