@@ -1,0 +1,21 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int[] sides = new int[3] { 8, 4, 6 }; // начальные значения сторон треугольника
+
+        // перебираем все возможные комбинации сторон треугольника
+        for (int i = 0; i <= 8; ++i)
+            for (int j = 0; j <= 8; ++j)
+                for (int k = 0; k <= 8; ++k)
+                {
+                    if (i + j > k && i + j <= 8 && i + k > j && i + k <= 8 && j + k > i && j + k <= 8)
+                    {
+                        double area = Math.Sqrt((i + j + k) * (i + j + k - i) * (i + j + k - j) * (i + j + k - k)) / 2;
+                        Console.WriteLine($"{area}");
+                    }
+                }
+    }
+}
