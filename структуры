@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+static void Main()
+{
+const double yearlySalary = 2e6; // Годовая зарплата (в рублях)
+
+// Количество товаров
+int numberOfItems = int.Parse(Console.ReadLine());
+
+// Цены на товары
+List<double> itemPrices = new List<double>();
+for (int i = 0; i < numberOfItems; i++)
+{
+itemPrices.Add(double.Parse(Console.ReadLine()));
+}
+
+// Найти минимальную комбинацию, сумма которой превышает годовой доход
+var combinations = from subset in itemPrices.Combinations(numberOfItems / 2 + 1)
+let totalPrice = subset.Sum()
+where totalPrice > yearlySalary
+select subset;
+
+if (!combinations.Any())
+{
+Console.WriteLine("Невозможно найти такую комбинацию.");
+}
+else
+{
+Console.WriteLine($"Минимальная комбинация:");
+foreach (var item in combinations.First())
+{
+Console.Write($"{item} ");
+}
+Console.WriteLine();
+}
+}
+}
