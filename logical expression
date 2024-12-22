@@ -1,0 +1,21 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Переменные
+        bool x = false;
+        bool y = false;
+        bool z = true;
+
+        // Выражение a)
+        Console.WriteLine("Значение выражения a): " + ((x && y && !z) ? "1" : "0"));
+
+        // Выражение b)
+        Console.WriteLine("Значение выражения b): " + ((!x && !y && !z) ? "1" : "0"));
+
+        // Выражение c)
+        Console.WriteLine("Значение выражения c): " + ((x && z) || (!x && y) ? "1" : "0"));
+    }
+}
