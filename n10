@@ -1,0 +1,56 @@
+using System;
+
+public class Tree
+{
+    public abstract int GetNumber();
+}
+
+public class PrimoTree : Tree
+{
+    private readonly int _firstNumber;
+
+    public PrimoTree(int firstNumber)
+    {
+        _firstNumber = firstNumber;
+    }
+
+    public override int GetNumber()
+    {
+        return _firstNumber;
+    }
+}
+
+public class SecondoTree : Tree
+{
+    private readonly int _secondNumber;
+
+    public SecondoTree(int secondNumber)
+    {
+        _secondNumber = secondNumber;
+    }
+
+    public override int GetNumber()
+    {
+        return _secondNumber;
+    }
+}
+
+public class TreeUtils
+{
+    public static double CalculateRectangleArea(double baseLength, double height)
+    {
+        return baseLength * height / 2;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        var primoTree = new PrimoTree(7);
+        var secondoTree = new SecondoTree(5);
+
+        var area = TreeUtils.CalculateRectangleArea(primoTree.GetNumber(), secondoTree.GetNumber());
+        Console.WriteLine($"Площадь прямоугольного треугольника: {area}");
+    }
+}
