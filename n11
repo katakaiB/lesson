@@ -1,0 +1,36 @@
+using System;
+using System.Windows.Forms;
+
+namespace RegistrationForm
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            // Проверка заполнения всех обязательных полей
+            if (txtUsername.Text == "" || txtPassword.Text == "")
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Добавление зарегистрированного пользователя в базу данных
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+            
+            // Здесь будет код для добавления пользователя в базу данных
+
+            // Успешная регистрация
+            MessageBox.Show($"Пользователь {username} успешно зарегистрирован.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Очистка полей формы после успешной регистрации
+            txtUsername.Clear();
+            txtPassword.Clear();
+        }
+    }
+}
