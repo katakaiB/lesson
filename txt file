@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+
+public class Aspirant
+{
+    public string LastName { get; set; }
+    public string FirstName { get; set; }
+    public string Patronymic { get; set; }
+    public char Gender { get; set; }
+    public string Nationality { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public Address HomeAddress { get; set; }
+    public List<int> ExamScores { get; set; }
+    public double PassingScore { get; set; }
+
+    public Aspirant(string lastName, string firstName, string patronymic, char gender, string nationality, DateTime dateOfBirth, Address homeAddress, List<int> examScores, double passingScore)
+    {
+        LastName = lastName;
+        FirstName = firstName;
+        Patronymic = patronymic;
+        Gender = gender;
+        Nationality = nationality;
+        DateOfBirth = dateOfBirth;
+        HomeAddress = homeAddress;
+        ExamScores = examScores;
+        PassingScore = passingScore;
+    }
+
+    public override string ToString()
+    {
+        return $"Фамилия: {LastName}, Имя: {FirstName}, Отчество: {Patronymic}, Пол: {Gender}, Национальность: {Nationality}, Дата рождения: {DateOfBirth:dd.MM.yyyy}, Адрес: {HomeAddress}, Оценки: {string.Join(", ", ExamScores)}, Проходной балл: {PassingScore}";
+    }
+}
+
+public class Address
+{
+    public int PostalCode { get; set; }
+    public string Country { get; set; }
+    public string Region { get; set; }
+    public string District { get; set; }
+    public string City { get; set; }
+    public string Street { get; set; }
+    public int HouseNumber { get; set; }
+    public int ApartmentNumber { get; set; }
+
+    public Address(int postalCode, string country, string region, string district, string city, string street, int houseNumber, int apartmentNumber)
+    {
+        PostalCode = postalCode;
+        Country = country;
+        Region = region;
+    }
+}
