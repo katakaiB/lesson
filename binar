@@ -1,0 +1,104 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary; // Добавлен необходимый namespace
+
+// Класс для хранения информации о книге
+[Serializable] // Добавлен атрибут для сериализации
+public class Book
+{
+    public string Author { get; set; }
+    public string Title { get; set; }
+    public int Circulation { get; set; }
+    public decimal Price { get; set; }
+    public int Year { get; set; }
+
+    public Book(string author, string title, int circulation, decimal price, int year)
+    {
+        Author = author;
+        Title = title;
+        Circulation = circulation;
+        Price = price;
+        Year = year;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Создаем список книг
+        List<Book> books = new List<Book>
+        {
+            new Book("Агата Кристи", "Убийство в Восточном экспрессе", 10000, 450.00m, 2020),
+            new Book("Джеймс Хэдли Чей", "Убийство по-джентльменски", 5000, 380.00m, 2019),
+            new Book("Борис Акунин", "Любовница смерти", 8000, 420.00m, 2021),
+            new Book("Дэн Браун", "Код да Винчи", 15000, 500.00m, 2022),
+            new Book("Агата Кристи", "Убийство в доме викария", 9000, 480.00m, 2023)
+        };
+
+        // Записываем данные в бинарный файл
+        using (FileStream fs = new FileStream("books.bin", FileMode.Create))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(fs, books);
+        }
+
+        // Читаем данные из файла и фильтруем по ключевому слову
+        List<Book> filteredBooks = LoadBooksWithKeyword("убийца");
+
+        // Выводим найденные книги
+        Console.WriteLine("Книги с ключевым словом 'убийца':");
+        foreach (var book in filteredBooks)
+        {
+            Console.WriteLine($"Автор: {book.Author}");
+            Console.WriteLine($"Название: {book.Title}");
+            Console.WriteLine($"Тираж: {book.Circulation}");
+            Console.WriteLine($"Цена: {book.Price} руб.");
+            Console.WriteLine($"Год издания: {book.Year}");
+            Console.WriteLine(new string('-', 40));
+        }
+    }
+
+    // Метод для загрузки книг с определенным ключевым словом
+    static List<Book> LoadBooksWithKeyword(string keyword)
+    {
+        List<Book> result = new List<Book>();
+        
+        using (FileStream fs = new FileStream("books.bin", FileMode.Open))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            List<Book> allBooks = (List<Book>)formatter.Deserialize(fs);
+            
+            foreach (var book in allBooks)
+            {
+                if (book.Title.ToLower().Contains(keyword.ToLower()))
+                {
+                    result.Add(book);
+                }
+            }
+        }
+        
+        return result;
+    }
+}
+
+
+Книги с ключевым словом 'убийца':
+Автор: Агата Кристи
+Название: Убийство в Восточном экспрессе
+Тираж: 10000
+Цена: 450.00 руб.
+Год издания: 2020
+----------------------------------------
+Автор: Джеймс Хэдли Чей
+Название: Убийство по-джентльменски
+Тираж: 5000
+Цена: 380.00 руб.
+Год издания: 2019
+----------------------------------------
+Автор: Агата Кристи
+Название: Убийство в доме викария
+Тираж: 9000
+Цена: 480.00 руб.
+Год издания: 2023
